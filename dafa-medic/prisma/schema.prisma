@@ -5,151 +5,14 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../app/generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
-}
-
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String   // store a hashed password (never plaintext)
-  fullName  String
-  role      Role     @default(USER)
-  isActive  Boolean  @default(true)
-
-  // Relations
-  orders    Order[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([role])
-  @@index([isActive])
-}
-
-model Product {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String   @unique
-  brand       String?
-  priceCents  Int
-  stock       Int      @default(0)
-  description String?
-  specs       Json?
-  images      Json?    // array of image URLs
-  isActive    Boolean  @default(true)
-
-  // Relations
-  orderItems  OrderItem[]
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([isActive])
-  @@index([brand])
-}
-
-model Order {
-  id             String      @id @default(cuid())
-
-  // Optional: if customer is logged in; null = guest checkout
-  userId         String?
-  user           User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
-
-  // Buyer details (always stored, even for logged-in users)
-  email          String
-  fullName       String
-  phone          String?
-  address        String?
-  district       String?
-
-  // Money stored as integer cents
-  subtotalCents  Int
-  shippingCents  Int
-  totalCents     Int
-
-  status         OrderStatus  @default(PENDING_PAYMENT)
-
-  // Optional quick reference from provider (not the source of truth)
-  paymentRef     String?
-
-  // Relations
-  items          OrderItem[]
-  payment        Payment?
-  shipment       Shipment?
-
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-
-  @@index([userId])
-  @@index([email])
-  @@index([status])
-  @@index([createdAt])
-}
-
-model OrderItem {
-  id         String  @id @default(cuid())
-
-  orderId    String
-  order      Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-
-  productId  String
-  product    Product @relation(fields: [productId], references: [id], onDelete: Restrict)
-
-  // Snapshots to preserve what was sold even if product later changes
-  name       String
-  unitCents  Int
-  quantity   Int
-
-  @@index([orderId])
-  @@index([productId])
-}
-
-model Payment {
-  id          String        @id @default(cuid())
-
-  // 1:1 with Order
-  orderId     String        @unique
-  order       Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
-
-  provider    PaymentProvider
-  externalId  String?       // e.g., preference/session/transaction ID from provider
-  status      PaymentStatus @default(PENDING)
-
-  amountCents Int
-  currency    Currency      @default(PEN)
-
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-
-  @@index([provider])
-  @@index([status])
-  @@index([externalId])
-}
-
-model Shipment {
-  id             String         @id @default(cuid())
-
-  // 1:1 with Order
-  orderId        String         @unique
-  order          Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
-
-  carrier        String?
-  trackingNumber String?
-  status         ShipmentStatus @default(PENDING)
-
-  shippedAt      DateTime?
-  deliveredAt    DateTime?
-
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-
-  @@index([status])
-  @@index([trackingNumber])
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 enum Role {
@@ -180,4 +43,154 @@ enum ShipmentStatus {
   DELIVERED
   RETURNED
   CANCELED
+}
+
+enum PaymentProvider {
+  STRIPE
+  MERCADOPAGO
+  KUSKI
+}
+
+enum Currency {
+  PEN
+  USD
+}
+
+model User {
+  id       String  @id @default(cuid())
+  email    String  @unique
+  password String // store a hashed password (never plaintext)
+  fullName String
+  role     Role    @default(USER)
+  isActive Boolean @default(true)
+
+  // Relations
+  orders Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([role])
+  @@index([isActive])
+}
+
+model Product {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  brand       String?
+  priceCents  Int
+  stock       Int     @default(0)
+  description String?
+  specs       Json?
+  images      Json? // array of image URLs
+  isActive    Boolean @default(true)
+
+  // Relations
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+  @@index([brand])
+}
+
+model Order {
+  id String @id @default(cuid())
+
+  // Optional: if customer is logged in; null = guest checkout
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  // Buyer details (always stored, even for logged-in users)
+  email    String
+  fullName String
+  phone    String?
+  address  String?
+  district String?
+
+  // Money stored as integer cents
+  subtotalCents Int
+  shippingCents Int
+  totalCents    Int
+
+  status OrderStatus @default(PENDING_PAYMENT)
+
+  // Optional quick reference from provider (not the source of truth)
+  paymentRef String?
+
+  // Relations
+  items    OrderItem[]
+  payment  Payment?
+  shipment Shipment?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id String @id @default(cuid())
+
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  // Snapshots to preserve what was sold even if product later changes
+  name      String
+  unitCents Int
+  quantity  Int
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model Payment {
+  id String @id @default(cuid())
+
+  // 1:1 with Order
+  orderId String @unique
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  provider   PaymentProvider
+  externalId String? // e.g., preference/session/transaction ID from provider
+  status     PaymentStatus   @default(PENDING)
+
+  amountCents Int
+  currency    Currency @default(PEN)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([provider])
+  @@index([status])
+  @@index([externalId])
+}
+
+model Shipment {
+  id String @id @default(cuid())
+
+  // 1:1 with Order
+  orderId String @unique
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  carrier        String?
+  trackingNumber String?
+  status         ShipmentStatus @default(PENDING)
+
+  shippedAt   DateTime?
+  deliveredAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([trackingNumber])
 }
