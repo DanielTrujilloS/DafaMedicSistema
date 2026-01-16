@@ -32,16 +32,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-teal-50">
       {/* Header */}
-      <header className="bg-gradient-to-r from-teal-400 to-teal-300 px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="text-2xl font-bold text-gray-800">
-            🏥 Dafa Medic ERL
-          </div>
-          <p className="text-sm text-gray-700">Equipos médicos de calidad</p>
+      <header className="px-8 py-5 flex justify-between items-center" style={{ background: '#91E7CB' }}>
+        <div className="flex items-center gap-3">
+          <img src="/logoprincipal.png" alt="Dafa Medic Logo" className="h-18 w-auto" />
         </div>
-        <nav className="hidden md:flex gap-8 items-center text-gray-800 font-medium">
+        <nav className="hidden md:flex gap-8 items-center text-gray-800 font-semibold">
           <Link href="/" className="hover:text-gray-900">
             Inicio
           </Link>
@@ -51,17 +48,19 @@ export default function Home() {
           <Link href="/" className="hover:text-gray-900">
             Nosotros
           </Link>
-          <Link
-            href="/cart"
-            className="bg-teal-600 text-white px-6 py-2 rounded-full hover:bg-teal-700 transition-colors font-semibold"
-          >
+          <button className="bg-teal-600 text-white px-6 py-2 rounded-full hover:bg-teal-700 transition-colors font-semibold">
             Solicitar cotización
-          </Link>
+          </button>
         </nav>
       </header>
 
       {/* Hero Slider */}
-      <section className="flex-1 bg-gradient-to-br from-teal-200 to-teal-100 px-6 py-16 md:py-24">
+      <section 
+        className="flex-1 px-6 py-16 md:py-24"
+        style={{
+          background: '#91E7CB'
+        }}
+      >
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center min-h-[500px]">
           {/* Left Content */}
           <div className="flex flex-col justify-center">
@@ -101,44 +100,148 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="bg-white px-6 py-16">
+      {/* Features Section - Productos Destacados */}
+      <section className="px-6 py-16" style={{ background: '#91E7CB' }}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            ¿Qué más tenemos para ofrecerte?
+            ¿Qué mas tenemos para ofrecerte?
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            {/* Product Card 1 */}
+            <div className="bg-white p-8 rounded-lg shadow-sm hover:shadow-sm transition-shadow border border-gray-100 group">
+              <div className="relative w-full h-48 bg-white rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                <img src="/estetoscopio1.png" alt="Estetoscopio" className="h-40 w-auto object-contain" />
+                <div className="absolute inset-0 bg-white bg-opacity-15 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <button className="bg-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                    Ver más
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Product Card 2 */}
+            <div className="bg-white p-8 rounded-lg shadow-sm hover:shadow-sm transition-shadow border border-gray-100 group">
+              <div className="relative w-full h-48 bg-white rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                <img src="/glucometro1.png" alt="Glucometro" className="h-40 w-auto object-contain" />
+                <div className="absolute inset-0 bg-white bg-opacity-15 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <button className="bg-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                    Ver más
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Product Card 3 */}
+            <div className="bg-white p-8 rounded-lg shadow-sm hover:shadow-sm transition-shadow border border-gray-100 group">
+              <div className="relative w-full h-48 bg-white rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                <img src="/oximetro1.png" alt="Oximetro" className="h-40 w-auto object-contain" />
+                <div className="absolute inset-0 bg-white bg-opacity-15 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <button className="bg-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                    Ver más
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Product Card 4 */}
+            <div className="bg-white p-8 rounded-lg shadow-sm hover:shadow-sm transition-shadow border border-gray-100 group">
+              <div className="relative w-full h-48 bg-white rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                <img src="/hemoglobi.png" alt="Hemoglobi" className="h-40 w-auto object-contain" />
+                <div className="absolute inset-0 bg-white bg-opacity-15 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <button className="bg-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                    Ver más
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Product Card 5 */}
+            <div className="bg-white p-8 rounded-lg shadow-sm hover:shadow-sm transition-shadow border border-gray-100 group">
+              <div className="relative w-full h-48 bg-white rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                <img src="/refri.png" alt="Refrigerador" className="h-40 w-auto object-contain" />
+                <div className="absolute inset-0 bg-white bg-opacity-15 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <button className="bg-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                    Ver más
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Product Card 6 */}
+            <div className="bg-white p-8 rounded-lg shadow-sm hover:shadow-sm transition-shadow border border-gray-100 group">
+              <div className="relative w-full h-48 bg-white rounded-lg flex items-center justify-center mb-4 overflow-hidden">
+                <img src="/tubos.png" alt="Tubos" className="h-40 w-auto object-contain" />
+                <div className="absolute inset-0 bg-white bg-opacity-15 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <button className="bg-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-600 transition-colors">
+                    Ver más
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Cotizar Button */}
+          <div className="flex justify-center">
+            <button className="bg-teal-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-600 transition-colors text-lg">
+              Cotizar ahora
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted By Section */}
+      <section className="px-6 py-16" style={{ background: 'linear-gradient(to bottom, #91E7CB, white)' }}>
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            Los que han <span className="font-black">confiado</span> en nosotros...
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="bg-gradient-to-br from-teal-50 to-teal-100 p-8 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="text-5xl mb-4">🚚</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Envío Rápido
-              </h3>
-              <p className="text-gray-700">
-                Entrega en toda la región con productos en perfectas condiciones
+            {/* Brand 1 - I.N.C.N */}
+            <div className="bg-teal-50 p-12 rounded-2xl flex items-center justify-center h-40 hover:shadow-lg transition-shadow">
+              <div className="text-center">
+                <div className="text-6xl font-bold text-red-600 mb-2">I</div>
+                <p className="text-red-600 font-bold text-lg">I.N.C.N</p>
+              </div>
+            </div>
+
+            {/* Brand 2 */}
+            <div className="bg-teal-50 p-12 rounded-2xl flex items-center justify-center h-40 hover:shadow-lg transition-shadow">
+              <div className="text-center text-gray-400">
+                <p className="text-lg font-semibold">Logo Cliente</p>
+              </div>
+            </div>
+
+            {/* Brand 3 */}
+            <div className="bg-teal-50 p-12 rounded-2xl flex items-center justify-center h-40 hover:shadow-lg transition-shadow">
+              <div className="text-center text-gray-400">
+                <p className="text-lg font-semibold">Logo Cliente</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Posts Section */}
+      <section className="bg-gradient-to-b from-white to-teal-50 px-6 py-16">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            Blog Posts
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Blog Post 1 */}
+            <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-lg transition-shadow">
+              <p className="text-gray-700 leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisl ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             </div>
 
-            {/* Feature 2 */}
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="text-5xl mb-4">✅</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Calidad Garantizada
-              </h3>
-              <p className="text-gray-700">
-                Todos nuestros productos cumplen con normas internacionales
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="text-5xl mb-4">💬</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Asesoría Personalizada
-              </h3>
-              <p className="text-gray-700">
-                Nuestro equipo está listo para ayudarte en tu compra
+            {/* Blog Post 2 */}
+            <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-lg transition-shadow">
+              <p className="text-gray-700 leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisl ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             </div>
           </div>
@@ -172,14 +275,113 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 px-6 py-12">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="mb-2">
-            © 2026 Dafa Medic ERL. Todos los derechos reservados.
-          </p>
-          <p className="text-sm">
-            Equipos médicos de calidad para profesionales de la salud
-          </p>
+      <footer className="bg-gray-900 text-gray-300 px-6 py-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            {/* Company Info */}
+            <div>
+              <div className="mb-4">
+                <img src="/logonegro.png" alt="Dafa Medic Logo" className="h-16 w-auto mb-2" />
+              </div>
+              <h3 className="text-white font-bold text-lg mb-4">Dafa Medic Eirl</h3>
+              <p className="text-sm text-gray-400 mb-4">
+                Tecnología médica al servicio del Perú desde 2009
+              </p>
+              <p className="text-sm text-gray-400 mb-2">
+                RUC: 20123456789
+              </p>
+              <p className="text-sm text-gray-400">
+                Razón Social: Dafa Medic S.A.C.
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white font-bold text-lg mb-4">Enlaces rápidos</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/" className="text-gray-400 hover:text-white transition-colors">
+                    Inicio
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/productos" className="text-gray-400 hover:text-white transition-colors">
+                    Productos
+                  </Link>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Instituciones
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Certificaciones
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    FAQ
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-white font-bold text-lg mb-4">Contacto</h4>
+              <p className="text-sm text-gray-400 mb-3">
+                📍 Av. Javier Prado Este 123<br />
+                San Isidro, Lima - Perú
+              </p>
+              <p className="text-sm text-gray-400 mb-2">
+                📞 (01) 234-5678
+              </p>
+              <p className="text-sm text-gray-400">
+                📧 ventas@dafamedic.com
+              </p>
+            </div>
+
+            {/* Social & Legal */}
+            <div>
+              <h4 className="text-white font-bold text-lg mb-4">Síguenos</h4>
+              <div className="flex gap-4 mb-8">
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-xl">
+                  f
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-xl">
+                  📷
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-xl">
+                  🎵
+                </a>
+              </div>
+
+              <h4 className="text-white font-bold text-lg mb-4">Legal</h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Política de privacidad
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Términos y condiciones
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                    Política de cookies
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Copyright */}
+          <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+            <p>© 2025 Dafa Medic S.A.C. Todos los derechos reservados.</p>
+          </div>
         </div>
       </footer>
     </div>
