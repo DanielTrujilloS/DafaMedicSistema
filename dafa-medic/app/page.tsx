@@ -1,105 +1,13 @@
 'use client';
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import Hero from '@/components/Hero';
+import Link from 'next/link';
 
 export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const slides = [
-    {
-      title: "Descubre los consumibles de líneas de hemodiálisis",
-      image: "🩺",
-      cta: "Ver catálogo",
-    },
-    {
-      title: "Equipos médicos de alta calidad",
-      image: "💊",
-      cta: "Explorar",
-    },
-    {
-      title: "Salud al alcance de todos",
-      image: "❤️",
-      cta: "Comprar",
-    },
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-teal-50">
-      {/* Header */}
-      <header className="px-8 py-5 flex justify-between items-center" style={{ background: '#91E7CB' }}>
-        <div className="flex items-center gap-3">
-          <img src="/logoprincipal.png" alt="Dafa Medic Logo" className="h-18 w-auto" />
-        </div>
-        <nav className="hidden md:flex gap-8 items-center text-gray-800 font-semibold">
-          <Link href="/" className="hover:text-gray-900">
-            Inicio
-          </Link>
-          <Link href="/productos" className="hover:text-gray-900">
-            Catálogo
-          </Link>
-          <Link href="/" className="hover:text-gray-900">
-            Nosotros
-          </Link>
-          <button className="bg-teal-600 text-white px-6 py-2 rounded-full hover:bg-teal-700 transition-colors font-semibold">
-            Solicitar cotización
-          </button>
-        </nav>
-      </header>
-
-      {/* Hero Slider */}
-      <section 
-        className="flex-1 px-6 py-16 md:py-24"
-        style={{
-          background: '#91E7CB'
-        }}
-      >
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center min-h-[500px]">
-          {/* Left Content */}
-          <div className="flex flex-col justify-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              {slides[currentSlide].title}
-            </h1>
-            <Link
-              href="/productos"
-              className="inline-block w-fit bg-teal-600 text-white px-8 py-3 rounded-full hover:bg-teal-700 transition-colors font-semibold text-lg"
-            >
-              {slides[currentSlide].cta}
-            </Link>
-          </div>
-
-          {/* Right Image - Carousel */}
-          <div className="flex justify-center items-center">
-            <div className="text-8xl animate-bounce">
-              {slides[currentSlide].image}
-            </div>
-          </div>
-        </div>
-
-        {/* Slider Indicators */}
-        <div className="flex justify-center gap-2 mt-8">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`h-3 rounded-full transition-all ${
-                index === currentSlide
-                  ? "bg-teal-600 w-8"
-                  : "bg-gray-400 w-3 hover:bg-gray-500"
-              }`}
-              aria-label={`Ir a slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      </section>
-
+    <>
+      <Hero />
+      
       {/* Features Section - Productos Destacados */}
       <section className="px-6 py-16" style={{ background: '#91E7CB' }}>
         <div className="max-w-7xl mx-auto">
@@ -384,6 +292,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
